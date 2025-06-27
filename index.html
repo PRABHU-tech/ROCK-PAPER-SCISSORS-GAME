@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rock Paper Scissors Game</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #74ebd5, #9face6);
+      text-align: center;
+      padding: 40px;
+      color: #333;
+      transition: 0.4s;
+    }
+
+    body.dark {
+      background: #121212;
+      color: #eee;
+    }
+
+    h1 {
+      font-size: 36px;
+      color: #fff;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    .game-container {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      max-width: 450px;
+      margin: 0 auto;
+      padding: 30px;
+      transition: background 0.4s;
+    }
+
+    body.dark .game-container {
+      background: #1e1e1e;
+    }
+
+    .choices {
+      margin: 20px 0;
+    }
+
+    .choices button {
+      font-size: 40px;
+      margin: 10px;
+      padding: 15px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    }
+
+    .choices button:hover {
+      transform: scale(1.2);
+    }
+
+    #result {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+
+    #score {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    #resetBtn, #themeToggle {
+      background-color: #ff5252;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+      margin-right: 10px;
+      transition: background 0.3s;
+    }
+
+    #themeToggle {
+      background-color: #1976d2;
+    }
+
+    #resetBtn:hover {
+      background-color: #e53935;
+    }
+
+    #themeToggle:hover {
+      background-color: #1565c0;
+    }
+
+    #history {
+      text-align: left;
+      max-height: 120px;
+      overflow-y: auto;
+      font-size: 14px;
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 10px;
+      background: #f1f1f1;
+    }
+
+    body.dark #history {
+      background: #2c2c2c;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Rock ✊ Paper 📄 Scissors ✂️</h1>
+
+  <div class="game-container">
+    <div class="choices">
+      <button onclick="play('rock')">✊</button>
+      <button onclick="play('paper')">📄</button>
+      <button onclick="play('scissors')">✂️</button>
+    </div>
+
+    <div id="result">Make your move!</div>
+    <div id="score">You: 0 | Computer: 0</div>
+
+    <button id="resetBtn" onclick="resetGame()">Reset Game</button>
+    <button id="themeToggle" onclick="toggleTheme()">Toggle Theme</button>
+
+    <div id="history"></div>
+  </div>
+
+  <!-- Sound Effects -->
+  <audio id="winSound" src="https://www.soundjay.com/human/sounds/applause-01.mp3"></audio>
+  <audio id="loseSound" src="https://www.soundjay.com/button/sounds/button-10.mp3"></audio>
+  <audio id="drawSound" src="https://www.soundjay.com/button/sounds/button-16.mp3"></audio>
+
+  <script>
+    let userScore = 0;
+    let compScore = 0;
+    const historyBox = document.getElementById("history");
+
+    function play(userChoice) {
+      const choices = ["rock", "paper", "scissors"];
+      const compChoice = choices[Math.floor(Math.random() * 3)];
+      let result = "";
+      const winSound = document.getElementById("winSound");
+      const loseSound = document.getElementById("loseSound");
+      const drawSound = document.getElementById("drawSound");
+
+      if (userChoice === compChoice) {
+        result = `🤝 It's a draw! You both chose ${emoji(userChoice)}.`;
+        drawSound.play();
+      } else if (
+        (userChoice === "rock" && compChoice === "scissors") ||
+        (userChoice === "paper" && compChoice === "rock") ||
+        (userChoice === "scissors" && compChoice === "paper")
+      ) {
+        result = `🎉 You Win! ${emoji(userChoice)} beats ${emoji(compChoice)}.`;
+        userScore++;
+        winSound.play();
+      } else {
+        result = `😢 You Lose! ${emoji(compChoice)} beats ${emoji(userChoice)}.`;
+        compScore++;
+        loseSound.play();
+      }
+
+      document.getElementById("result").innerText = result;
+      document.getElementById("score").innerText = `You: ${userScore} | Computer: ${compScore}`;
+      addToHistory(result);
+    }
+
+    function emoji(choice) {
+      return choice === "rock" ? "✊" : choice === "paper" ? "📄" : "✂️";
+    }
+
+    function resetGame() {
+      userScore = 0;
+      compScore = 0;
+      document.getElementById("result").innerText = "Make your move!";
+      document.getElementById("score").innerText = `You: 0 | Computer: 0`;
+      historyBox.innerHTML = "";
+    }
+
+    function addToHistory(resultText) {
+      const entry = document.createElement("div");
+      entry.innerText = resultText;
+      historyBox.prepend(entry);
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle("dark");
+    }
+  </script>
+
+</body>
+</html>
