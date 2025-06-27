@@ -15,9 +15,7 @@ It lets you play against the computer with sound effects, score tracking, game h
 ---
 
 ## 🚀 Live Demo
-Play it here: [https://your-username.github.io/rock-paper-scissors](https://your-username.github.io/rock-paper-scissors)
-
-> (Replace `your-username` with your actual GitHub username)
+Play it here: [https://prabhu-tech.github.io/rock-paper-scissors](https://prabhu-tech.github.io/rock-paper-scissors)
 
 ---
 
@@ -36,15 +34,14 @@ Play it here: [https://your-username.github.io/rock-paper-scissors](https://your
 ---
 
 ## 📷 Screenshot
-![screenshot](https://via.placeholder.com/700x400?text=Rock-Paper-Scissors+Game+Screenshot)
+*(Add your screenshot here once you take one)*
 
 ---
 
 ## 👨‍💻 Author
-- **Prabhu G**
+- **Prabhu G** ([@PRABHU-tech](https://github.com/PRABHU-tech))
 
 ---
 
 ## 🌟 Give it a star!
 If you like this project, please ⭐ the repo to support!
-
